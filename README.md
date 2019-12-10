@@ -34,6 +34,10 @@ The final number on the test set was obtained with addition of validation data i
 1. Convert PyTorch model to ONNX format: run script in terminal `python scripts/convert_to_onnx.py --checkpoint-path <CHECKPOINT> --single-person`. It produces `human-pose-estimation.onnx`.
 2. Convert ONNX model to OpenVINO format with Model Optimizer: run in terminal `python <OpenVINO_INSTALL_DIR>/deployment_tools/model_optimizer/mo.py --input_model human-pose-estimation.onnx --input data --mean_values data[128.0,128.0,128.0] --scale_values data[256] --output stage_1_output_1_heatmaps`. This produces model `human-pose-estimation.xml` and weights `human-pose-estimation.bin` in single-precision floating-point format (FP32).
 
+## Pre-trained model
+
+There is pre-trained model on COCO dataset. For the demo and model please check this [repository](https://github.com/opencv/openvino_training_extensions/blob/develop/pytorch_toolkit/human_pose_estimation/README_single.md#pre-trained-model).
+
 ## Citation:
 
 If this helps your research, please cite the papers:
