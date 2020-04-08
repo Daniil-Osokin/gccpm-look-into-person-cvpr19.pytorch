@@ -122,7 +122,7 @@ def train(images_folder, num_refinement_stages, base_lr, batch_size, batches_per
                     'current_epoch': epochId},
                    snapshot_name)
         if (epochId + 1) % checkpoint_after == 0:
-            snapshot_name = '{}/checkpoint_epoch_{}.pth'.format(checkpoints_folder, epochId)
+            snapshot_name = '{}/checkpoint_epoch_{}.pth'.format(checkpoints_folder, epochId + 1)
             torch.save({'state_dict': net.module.state_dict(),
                         'optimizer': optimizer.state_dict(),
                         'scheduler': scheduler.state_dict(),
