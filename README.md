@@ -19,24 +19,43 @@ This repository contains training code for the paper [Global Context for Convolu
 
 ## Training
 
-1. Download pre-trained MobileNet v1 weights `mobilenet_sgd_68.848.pth.tar` from: [https://github.com/marvis/pytorch-mobilenet](https://github.com/marvis/pytorch-mobilenet) (sgd option). If this doesn't work, download from [GoogleDrive](https://drive.google.com/file/d/18Ya27IAhILvBHqV_tDp0QjDFvsNNy-hv/view?usp=sharing).
-2. Run in terminal: `python train.py --dataset-folder <LIP_HOME> --checkpoint-path mobilenet_sgd_68.848.pth.tar --from-mobilenet`
+1. Download pre-trained MobileNet v1 weights `mobilenet_sgd_68.848.pth.tar` from: [https://github.com/marvis/pytorch-mobilenet](https://github.com/marvis/pytorch-mobilenet) (sgd option). If this doesn't work, download from [Google Drive](https://drive.google.com/file/d/18Ya27IAhILvBHqV_tDp0QjDFvsNNy-hv/view?usp=sharing).
+2. Run in terminal:
+```
+python train.py --dataset-folder <LIP_HOME> --checkpoint-path mobilenet_sgd_68.848.pth.tar --from-mobilenet
+```
 
 ## Validation
-1. Run in terminal `python val.py --dataset-folder <LIP_HOME> --checkpoint-path <CHECKPOINT>`. One should observe ~84% PCKh on validation set (use `--multiscale` and set `flip` to `True` for better results).
+1. Run in terminal:
+```
+python val.py --dataset-folder <LIP_HOME> --checkpoint-path <CHECKPOINT>
+```
 
   [OPTIONAL] Pass `--visualize` key to see predicted keypoints results.
 
+  [OPTIONAL] Use `--multiscale` and set `flip` to `True` for better results.
+
 The final number on the test set was obtained with addition of validation data into training.
-
-## Conversion to OpenVINO format:
-
-1. Convert PyTorch model to ONNX format: run script in terminal `python scripts/convert_to_onnx.py --checkpoint-path <CHECKPOINT> --single-person`. It produces `human-pose-estimation.onnx`.
-2. Convert ONNX model to OpenVINO format with Model Optimizer: run in terminal `python <OpenVINO_INSTALL_DIR>/deployment_tools/model_optimizer/mo.py --input_model human-pose-estimation.onnx --input data --mean_values data[128.0,128.0,128.0] --scale_values data[256] --output stage_1_output_1_heatmaps`. This produces model `human-pose-estimation.xml` and weights `human-pose-estimation.bin` in single-precision floating-point format (FP32).
 
 ## Pre-trained model
 
-There is pre-trained model on COCO dataset. For the demo and model please check this [repository](https://github.com/opencv/openvino_training_extensions/blob/develop/pytorch_toolkit/human_pose_estimation/README_single.md#pre-trained-model).
+* Pre-trained model on the Look Into Person dataset (84.57 PCKh@0.5): [Google Drive](https://drive.google.com/file/d/1Bz9uyGTe3vphht616Loi-ZHWEhbwoD83/view?usp=sharing).
+
+* Also there is pre-trained model on the COCO dataset. For the demo and model please check this [repository](https://github.com/opencv/openvino_training_extensions/blob/develop/pytorch_toolkit/human_pose_estimation/README_single.md#pre-trained-model).
+
+## Conversion to OpenVINO format:
+
+1. Convert PyTorch model to ONNX format, run script in terminal:
+```
+python scripts/convert_to_onnx.py --checkpoint-path <CHECKPOINT> --single-person`
+```
+It produces `human-pose-estimation.onnx`.
+
+2. Convert ONNX model to OpenVINO format with Model Optimizer, run in terminal:
+```
+python <OpenVINO_INSTALL_DIR>/deployment_tools/model_optimizer/mo.py --input_model human-pose-estimation.onnx --input data --mean_values data[128.0,128.0,128.0] --scale_values data[256] --output stage_1_output_1_heatmaps
+```
+This produces model `human-pose-estimation.xml` and weights `human-pose-estimation.bin` in single-precision floating-point format (FP32).
 
 ## Citation:
 
