@@ -41,7 +41,7 @@ The final number on the test set was obtained with addition of validation data i
 
 * Pre-trained model on the Look Into Person dataset (84.57 PCKh@0.5): [Google Drive](https://drive.google.com/file/d/1Bz9uyGTe3vphht616Loi-ZHWEhbwoD83/view?usp=sharing).
 
-* Also there is pre-trained model on the COCO dataset. For the demo and model please check this [repository](https://github.com/opencv/openvino_training_extensions/blob/develop/pytorch_toolkit/human_pose_estimation/README_single.md#pre-trained-model).
+* Also there is pre-trained model on the COCO dataset and corresponding demo in the [OpenVINO Model Zoo](https://github.com/openvinotoolkit/open_model_zoo/tree/master/demos/single_human_pose_estimation_demo/python).
 
 ## Conversion to OpenVINO format:
 
